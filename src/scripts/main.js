@@ -6,42 +6,43 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
 appendRow.addEventListener('click', (e) => {
-  const copyOfRow = document.querySelector('tr').cloneNode(true);
-  const parentElement = document.querySelector('tbody');
+  const tbody = document.querySelector('tbody');
 
-  if (parentElement.children.length < 10) {
-    parentElement.append(copyOfRow);
+  if (tbody && tbody.children.length < 10) {
+    const copyOfRow = document.querySelector('tr')
+      ? document.querySelector('tr').cloneNode(true)
+      : document.createElement('tr');
+
+    tbody.append(copyOfRow);
   }
 });
 
 removeRow.addEventListener('click', (e) => {
-  const parentElement = document.querySelector('tbody');
+  const tbody = document.querySelector('tbody');
 
-  if (parentElement.children.length > 2) {
-    parentElement.lastElementChild.remove();
+  if (tbody && tbody.children.length > 2) {
+    tbody.lastElementChild.remove();
   }
 });
 
 appendColumn.addEventListener('click', (e) => {
-  const allRows = Array.from(document.querySelectorAll('tr'));
-  const checkLength = document.querySelector('tr').children.length;
+  const allRows = document.querySelectorAll('tr');
 
-  if (checkLength < 10) {
+  if (allRows.length > 0 && allRows[0].children.length < 10) {
     for (const row of allRows) {
-      const copyOfColumn = document.querySelector('td').cloneNode(true);
+      const newColumn = document.createElement('td');
 
-      row.append(copyOfColumn);
+      row.appendChild(newColumn);
     }
   }
 });
 
 removeColumn.addEventListener('click', (e) => {
-  const allRows = Array.from(document.querySelectorAll('tr'));
-  const checkLength = document.querySelector('tr').children.length;
+  const allRows = document.querySelectorAll('tr');
 
-  if (checkLength > 2) {
+  if (allRows.length > 0 && allRows[0].children.length > 2) {
     for (const row of allRows) {
       row.lastElementChild.remove();
     }
   }
-})
+});
