@@ -15,6 +15,12 @@ appendRow.addEventListener('click', (e) => {
 
     tbody.append(copyOfRow);
   }
+
+  if (tbody.children.length === 10) {
+    appendRow.disabled = true;
+  }
+
+  removeRow.disabled = false;
 });
 
 removeRow.addEventListener('click', (e) => {
@@ -23,6 +29,12 @@ removeRow.addEventListener('click', (e) => {
   if (tbody && tbody.children.length > 2) {
     tbody.lastElementChild.remove();
   }
+
+  if (tbody.children.length === 2) {
+    removeRow.disabled = true;
+  }
+
+  appendRow.disabled = false;
 });
 
 appendColumn.addEventListener('click', (e) => {
@@ -35,6 +47,12 @@ appendColumn.addEventListener('click', (e) => {
       row.appendChild(newColumn);
     }
   }
+
+  if (document.querySelector('tr').children.length === 10) {
+    appendColumn.disabled = true;
+  }
+
+  removeColumn.disabled = false;
 });
 
 removeColumn.addEventListener('click', (e) => {
@@ -45,4 +63,10 @@ removeColumn.addEventListener('click', (e) => {
       row.lastElementChild.remove();
     }
   }
+
+  if (document.querySelector('tr').children.length === 2) {
+    removeColumn.disabled = true;
+  }
+
+  appendColumn.disabled = false;
 });
